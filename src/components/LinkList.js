@@ -1,6 +1,6 @@
 import React from 'react'
-import {Link}  from './Link'
-import { Query } from 'react-apollo'
+import {Link} from './Link'
+import {useQuery} from 'react-apollo'
 import gql from 'graphql-tag'
 
 export const LinkList = () => {
@@ -16,15 +16,10 @@ export const LinkList = () => {
     }
   }
 `
-    return (
-        <Query query={FEED_QUERY}>
-            {({loading, error, data}) => {
-                if (loading) return <div>Fetching</div>
-                if (error) return <div>Error</div>
+    const {loading, error, data} = useQuery(FEED_QUERY);
+    if (loading) return <div>Fetching</div>
+    if (error) return <div>Error</div>
 
-                const linksToRender = data.feed.links
-                return linksToRender.map(link => <Link key={link.id} link={link} />)
-            }}
-        </Query>
-    )
+    const linksToRender = data.feed.links
+    return linksToRender.map(link => <Link key={link.id} link={link}/>)
 };
