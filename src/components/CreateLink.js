@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import gql from 'graphql-tag'
-import {useMutation} from 'react-apollo'
 import {useHistory} from "react-router";
 import {LINKS_PER_PAGE} from "../constants";
 import {FEED_QUERY} from "./LinkList";
+import { useMutation, gql } from '@apollo/client';
 
 export const CreateLink = () => {
     const [url, setUrl] = useState('')

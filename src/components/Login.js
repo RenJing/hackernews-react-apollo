@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import {useMutation} from 'react-apollo'
-import gql from 'graphql-tag'
+import { useMutation, gql } from '@apollo/client';
 import {AUTH_TOKEN} from "../constants";
 
 const Login = () => {

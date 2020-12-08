@@ -7,12 +7,14 @@ import {BrowserRouter} from 'react-router-dom'
 import { setContext } from '@apollo/client/link/context';
 
 // 1
-import {ApolloProvider} from 'react-apollo'
-import {ApolloClient} from 'apollo-client'
-import {createHttpLink} from 'apollo-link-http'
-import {InMemoryCache} from 'apollo-cache-inmemory'
-import {AUTH_TOKEN} from "./constants";
+import {
+    ApolloProvider,
+    ApolloClient,
+    createHttpLink,
+    InMemoryCache
+} from '@apollo/client';
 
+import {AUTH_TOKEN} from "./constants";
 
 // 2
 const httpLink = createHttpLink({

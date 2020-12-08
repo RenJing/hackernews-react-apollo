@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from './Link'
-import {useQuery} from 'react-apollo'
-import gql from 'graphql-tag'
+import { useQuery, gql } from '@apollo/client';
 
 export const FEED_QUERY = gql`
   {
     feed {
+      id
       links {
         id
         createdAt
@@ -24,10 +24,11 @@ export const FEED_QUERY = gql`
       }
     }
   }
-`
+`;
 
 export const LinkList = () => {
-    const {loading, error, data} = useQuery(FEED_QUERY);
+    const {loading, error, data} = useQuery(FEED_QUERY, {
+    });
     if (loading) return <div>Fetching</div>
     if (error) return <div>Error</div>
 
