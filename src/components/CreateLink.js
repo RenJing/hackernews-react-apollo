@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import gql from 'graphql-tag'
 import {useMutation} from 'react-apollo'
 import {useHistory} from "react-router";
+import {LINKS_PER_PAGE} from "../constants";
+import {FEED_QUERY} from "./LinkList";
 
 export const CreateLink = () => {
     const [url, setUrl] = useState('')
@@ -19,6 +21,34 @@ export const CreateLink = () => {
   }
 `
     const [addPost, {data}] = useMutation(POST_MUTATION, {
+        update: (cache, { data: { post } }) => {
+            const take = LINKS_PER_PAGE;
+            const skip = 0;
+            const orderBy = { createdAt: 'desc' };
+
+            const data = cache.readQuery({
+                query: FEED_QUERY,
+                variables: {
+                    take,
+                    skip,
+                    orderBy
+                }
+            });
+
+            cache.writeQuery({
+                query: FEED_QUERY,
+                data: {
+                    feed: {
+                        links: [post, ...data.feed.links]
+                    }
+                },
+                variables: {
+                    take,
+                    skip,
+                    orderBy
+                }
+            });
+        },
         onCompleted() {
             history.push('/')
         }}
