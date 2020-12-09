@@ -1,10 +1,11 @@
 import '../styles/App.css';
+import { Switch, Route } from 'react-router-dom'
 import {LinkList} from './LinkList'
 import React from "react";
 import {CreateLink} from "./CreateLink";
 import Header from "./Header";
-import { Switch, Route } from 'react-router-dom'
 import Login from "./Login";
+import Search from "./Search";
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
                     <Route exact path="/" component={LinkList} />
                     <Route exact path="/create" component={CreateLink} />
                     <Route exact path="/login" component={Login} />
-                </Switch>
+                    <Route exact path="/search" component={Search} /></Switch>
             </div>
         </div>
     )
